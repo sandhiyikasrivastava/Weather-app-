@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>💖 Weather Cuties — Pastel Weather App</title>
+    <meta name="description" content="A cute pastel weather app powered by WeatherAPI.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body data-theme="sunny">
+    <div class="bg-decor" aria-hidden="true"><span>☀️</span><span>🌻</span><span>🌷</span><span>✨</span><span>🦋</span><span>🌈</span><span>💛</span><span>🍋</span></div>
+    <div id="fx" class="fx" aria-hidden="true"></div>
+    <main class="container">
+      <header class="hero">
+        <div class="hero-text">
+          <p class="hello">🌷 hello cutie! 🌷</p>
+          <h1>💖 Weather Cuties 🎀</h1>
+          <p class="subtitle">Search any city for its temperature, humidity, wind &amp; cutie mood~ ✨</p>
+          <p class="theme-line">Now showing: <span id="theme-pill" class="theme-pill" data-theme-pill>☀️ Sunny UI</span></p>
+        </div>
+        <a class="badge" href="https://www.weatherapi.com/" target="_blank" rel="noreferrer">🌤️ by WeatherAPI.com</a>
+      </header>
+
+      <section class="card search-card">
+        <form id="search-form" autocomplete="off">
+          <label for="city-input">💌 Which city, bestie?</label>
+          <div class="search-row">
+            <input id="city-input" type="text" placeholder="e.g. Seoul, Paris, Tokyo… 💭" required minlength="2" />
+            <button type="submit" id="search-btn">🔍 Search</button>
+          </div>
+        </form>
+        <div class="chips-label">💗 tap a cutie city 💗</div>
+        <div id="city-chips" class="chips" role="list"></div>
+      </section>
+
+      <div id="status" class="status" role="status" aria-live="polite"></div>
+
+      <section id="result" class="grid hidden">
+        <div class="card current">
+          <div class="current-top">
+            <div>
+              <h2 id="location-name">—</h2>
+              <p id="location-meta" class="muted">—</p>
+              <p id="condition-text" class="condition">—</p>
+            </div>
+            <img id="condition-icon" alt="weather condition icon" class="condition-icon" />
+          </div>
+          <div class="metrics">
+            <div class="metric pink"><span class="metric-label">🌡️ Temp</span><strong id="m-temp">—</strong><small id="m-temp-sub" class="muted"></small></div>
+            <div class="metric blue"><span class="metric-label">💧 Humidity</span><strong id="m-humidity">—</strong><small class="muted">dewy-o-meter 💦</small></div>
+            <div class="metric lilac"><span class="metric-label">💨 Wind</span><strong id="m-wind">—</strong><small id="m-wind-sub" class="muted"></small></div>
+          </div>
+          <div class="mood-row">
+            <span>🎀 Cutie mood:</span>
+            <span id="mood-badge" class="mood">—</span>
+          </div>
+          <p id="mood-reason" class="muted mood-reason"></p>
+          <details class="thresholds">
+            <summary>💡 how the mood is decided</summary>
+            <ul>
+              <li>💨 <b>Windy</b>: wind ≥ 30 kph (first check!)</li>
+              <li>🥵 <b>Uncomfortable</b>: humidity ≥ 80% AND temp ≥ 25°C</li>
+              <li>☀️ <b>Hot</b>: temp ≥ 30°C</li>
+              <li>❄️ <b>Cold</b>: temp ≤ 10°C</li>
+              <li>🌸 <b>Pleasant</b>: everything else — perfect picnic weather!</li>
+            </ul>
+          </details>
+        </div>
+
+        <div class="card json-card">
+          <div class="json-header">
+            <h3>📜 Raw JSON</h3>
+            <button id="copy-raw" class="ghost-btn" type="button">💕 Copy</button>
+          </div>
+          <pre id="raw-json" class="json-block raw"></pre>
+        </div>
+
+        <div class="card json-card">
+          <div class="json-header">
+            <h3>🌈 Pretty JSON</h3>
+          </div>
+          <pre id="pretty-json" class="json-block pretty" aria-label="formatted JSON"></pre>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <p>made with 💖 · Endpoint: <code>https://api.weatherapi.com/v1/current.json?key=API_KEY&amp;q=CITY&amp;aqi=no</code></p>
+        <p>Key is injected via <code>VITE_WEATHER_API_KEY</code> (see <code>.env.example</code>). For production, proxy via a serverless function to avoid exposing the key in the browser.</p>
+      </footer>
+    </main>
+    <script src="./config.js"></script>
+    <script src="./themes.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,248 @@
+/* 🎀 Weather Cuties — pastel kawaii theme, mobile-first, responsive */
+:root {
+  --ink: #6b3f5e;
+  --muted: #b07d9c;
+  --pink: #ff8fb3;
+  --pink-deep: #f8618f;
+  --lilac: #c4a7f5;
+  --baby-blue: #9fd8f5;
+  --peach: #ffc9a8;
+  --cream: #fff7fb;
+  --card: #ffffff;
+  --radius: 26px;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Quicksand", ui-sans-serif, system-ui, sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(600px 320px at 8% 0%, #ffd6e7 0%, transparent 65%),
+    radial-gradient(700px 360px at 95% 8%, #e3d0ff 0%, transparent 60%),
+    radial-gradient(800px 420px at 50% 110%, #cdeffb 0%, transparent 60%),
+    linear-gradient(180deg, #fff0f6 0%, #f6ecff 45%, #e8f7ff 100%);
+  min-height: 100vh;
+}
+.bg-decor {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  font-size: 26px; opacity: 0.5;
+}
+.bg-decor span { position: absolute; animation: floaty 7s ease-in-out infinite; }
+.bg-decor span:nth-child(1){ top:6%; left:6%; }
+.bg-decor span:nth-child(2){ top:12%; right:10%; animation-delay:-1s; }
+.bg-decor span:nth-child(3){ top:46%; left:3%; animation-delay:-2s; }
+.bg-decor span:nth-child(4){ top:30%; right:4%; animation-delay:-3s; }
+.bg-decor span:nth-child(5){ bottom:26%; left:8%; animation-delay:-4s; }
+.bg-decor span:nth-child(6){ bottom:14%; right:12%; animation-delay:-5s; }
+.bg-decor span:nth-child(7){ top:62%; right:6%; animation-delay:-2.5s; }
+.bg-decor span:nth-child(8){ bottom:6%; left:44%; animation-delay:-1.5s; }
+@keyframes floaty { 0%,100%{ transform: translateY(0) rotate(-6deg);} 50%{ transform: translateY(-14px) rotate(6deg);} }
+.container { max-width: 1080px; margin: 0 auto; padding: 26px 16px 56px; position: relative; z-index: 1; }
+.hero { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin: 6px 0 18px; flex-wrap: wrap; }
+.hello { font-family: "Caveat", cursive; font-size: 24px; color: var(--pink-deep); margin: 0; }
+.hero h1 {
+  margin: 2px 0 4px; font-size: clamp(30px, 5vw, 46px); letter-spacing: -0.01em; color: #8a3b6b;
+  text-shadow: 2px 2px 0 #ffd9e8;
+}
+.subtitle { margin: 0; color: var(--muted); font-weight: 600; }
+.badge {
+  font-size: 12.5px; font-weight: 700; color: #8a3b6b; text-decoration: none; white-space: nowrap;
+  background: #fff; border: 2px solid #ffd0e2; padding: 8px 14px; border-radius: 999px;
+  box-shadow: 0 4px 0 #ffd0e2;
+}
+.badge:hover { transform: translateY(-1px); }
+.card {
+  background: var(--card); color: var(--ink); border-radius: var(--radius);
+  padding: 22px; border: 2.5px solid #ffe0ee;
+  box-shadow: 0 10px 0 rgba(248, 97, 143, 0.12);
+}
+.search-card { background: linear-gradient(180deg, #ffffff 0%, #fff3f9 100%); }
+.search-card label { font-weight: 700; font-size: 15px; color: #a24d7d; }
+.search-row { display: flex; gap: 10px; margin-top: 10px; }
+.search-row input {
+  flex: 1; padding: 14px 18px; border-radius: 999px; min-width: 0;
+  border: 2.5px solid #ffc7dd; font-size: 16px; font-family: inherit; color: var(--ink);
+  outline: none; background: #fffafe;
+}
+.search-row input:focus { border-color: var(--pink-deep); box-shadow: 0 0 0 5px #ffd9e8; }
+.search-row button {
+  padding: 0 24px; border: 0; border-radius: 999px; font-weight: 700; cursor: pointer;
+  font-size: 15px; font-family: inherit; color: #fff; white-space: nowrap;
+  background: linear-gradient(135deg, var(--pink-deep), var(--lilac));
+  box-shadow: 0 5px 0 #d14d7c;
+}
+.search-row button:active { transform: translateY(3px); box-shadow: 0 2px 0 #d14d7c; }
+.search-row button:disabled { opacity: 0.6; cursor: wait; }
+.chips-label { margin: 16px 0 10px; font-size: 13.5px; color: #c06a97; font-weight: 700; }
+.chips { display: flex; flex-wrap: wrap; gap: 9px; }
+.chip {
+  border: 2px solid #ffd0e2; background: #fff5fa; color: #a24d7d;
+  padding: 8px 15px; border-radius: 999px; cursor: pointer;
+  font-size: 14px; font-weight: 700; font-family: inherit;
+  transition: transform 0.12s ease;
+}
+.chip:nth-child(3n){ background: #f4efff; border-color: #d9c8ff; color: #7a5fc0; }
+.chip:nth-child(3n+1){ background: #eef9ff; border-color: #bfe6fb; color: #3f8fb5; }
+.chip:hover { transform: scale(1.07) rotate(-1deg); }
+.chip.active { background: var(--pink-deep); border-color: var(--pink-deep); color: #fff; box-shadow: 0 4px 0 #d14d7c; }
+.status { margin: 14px 4px; min-height: 24px; font-size: 14px; font-weight: 600; color: #a24d7d; }
+.status.loading { color: #b07d9c; }
+.status.loading::before { content: "💭 "; }
+.status.error { color: #b3405e; background: #ffe4ee; border: 2px dashed #ff9ebb; padding: 10px 14px; border-radius: 16px; }
+.grid { display: grid; gap: 16px; margin-top: 4px; grid-template-columns: 1fr; }
+@media (min-width: 900px) { .grid { grid-template-columns: 1.05fr 1fr 1fr; } }
+@media (min-width: 600px) and (max-width: 899px) { .grid { grid-template-columns: 1fr 1fr; } .current { grid-column: span 2; } }
+.current { background: linear-gradient(180deg, #ffffff 0%, #fff0f7 60%, #f3e9ff 100%); }
+.current-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+.current-top h2 { margin: 0; font-size: 25px; color: #8a3b6b; }
+.muted { color: var(--muted); }
+.condition { margin: 6px 0 0; font-weight: 700; color: #c06a97; }
+.condition-icon { width: 72px; height: 72px; background: #fff; border-radius: 50%; border: 2.5px solid #ffe0ee; padding: 4px; }
+.metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 14px; }
+@media (max-width: 420px){ .metrics { grid-template-columns: 1fr; } }
+.metric { border-radius: 20px; padding: 13px 10px; text-align: center; border: 2px solid; }
+.metric.pink { background: #fff0f6; border-color: #ffc7dd; }
+.metric.blue { background: #eef9ff; border-color: #bfe6fb; }
+.metric.lilac { background: #f4efff; border-color: #d9c8ff; }
+.metric-label { display: block; font-size: 12.5px; font-weight: 700; }
+.metric strong { display: block; font-size: 24px; margin: 4px 0 2px; color: #8a3b6b; }
+.metric small { font-size: 11px; }
+.mood-row { display: flex; align-items: center; gap: 10px; margin-top: 16px; font-weight: 700; font-size: 16px; }
+.mood { padding: 7px 18px; border-radius: 999px; font-weight: 700; color: #fff; background: #c9a0b8; border: 2px solid #fff; box-shadow: 0 3px 0 rgba(0,0,0,.08); }
+.mood.Pleasant { background: linear-gradient(135deg, #7ed491, #4caf7d); }
+.mood.Hot { background: linear-gradient(135deg, #ffb26b, #ff7d9c); }
+.mood.Cold { background: linear-gradient(135deg, #9fd8f5, #a78bfa); }
+.mood.Windy { background: linear-gradient(135deg, #c4a7f5, #8b7cf6); }
+.mood.Uncomfortable { background: linear-gradient(135deg, #ff9ebb, #e05260); }
+.mood-reason { font-size: 13px; margin: 8px 0 0; }
+.thresholds { margin-top: 12px; font-size: 13px; background: #fffafe; border: 2px dashed #ffc7dd; border-radius: 16px; padding: 8px 14px; }
+.thresholds ul { margin: 8px 0 4px 18px; padding: 0; }
+.thresholds summary { cursor: pointer; font-weight: 700; color: #c06a97; }
+.json-card h3 { margin: 0; font-size: 15px; color: #8a3b6b; }
+.json-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.ghost-btn {
+  border: 2px solid #ffc7dd; background: #fff0f6; border-radius: 999px; padding: 6px 14px;
+  cursor: pointer; font-weight: 700; font-family: inherit; color: #c04a7c;
+}
+.ghost-btn:hover { background: #ffd9e8; }
+.json-block {
+  margin: 0; background: #4a2b45; color: #ffe9f3; border-radius: 18px; padding: 14px;
+  overflow: auto; max-height: 420px; font-size: 12.5px; line-height: 1.6;
+  font-family: ui-monospace, Menlo, Consolas, monospace; white-space: pre-wrap; word-break: break-word;
+  border: 2.5px solid #ffd0e2;
+}
+.tok-key { color: #ffb3d1; } .tok-str { color: #b8f5c8; } .tok-num { color: #ffe08a; }
+.tok-bool { color: #d3bfff; } .tok-null { color: #ff9eb5; }
+.hidden { display: none !important; }
+.footer { margin-top: 20px; font-size: 12.5px; color: #b07d9c; text-align: center; font-weight: 600; }
+.footer code { background: rgba(255,255,255,.75); border: 1.5px solid #ffd0e2; padding: 2px 8px; border-radius: 999px; }
+
+/* ---------- dynamic weather themes (switched via body[data-theme], no reload) ---------- */
+body, .card, .chip, .search-row input { transition: background-color .7s ease, background .7s ease, color .7s ease, border-color .7s ease; }
+.theme-line { margin: 8px 0 0; font-size: 13px; font-weight: 700; color: var(--muted); }
+.theme-pill {
+  display: inline-block; padding: 4px 14px; border-radius: 999px; font-weight: 700;
+  background: #fff; border: 2px solid #ffd0e2; color: #a24d7d; box-shadow: 0 3px 0 rgba(248,97,143,.15);
+}
+/* 1 — Sunny: bright & warm */
+body[data-theme="sunny"] {
+  --ink: #7a4a1f; --muted: #b3814d;
+  background:
+    radial-gradient(700px 380px at 85% -5%, #ffe36e 0%, transparent 60%),
+    radial-gradient(600px 320px at 8% 0%, #ffd6e7 0%, transparent 65%),
+    linear-gradient(180deg, #fff7d6 0%, #ffe9c9 45%, #ffd9e8 100%);
+}
+/* 2 — Cloudy: soft gray-blue, calm */
+body[data-theme="cloudy"] {
+  --ink: #4a5a6e; --muted: #8a99ae;
+  background:
+    radial-gradient(700px 380px at 50% -10%, #e8eef5 0%, transparent 60%),
+    linear-gradient(180deg, #eef2f7 0%, #dde6f0 50%, #cfdcec 100%);
+}
+body[data-theme="cloudy"] .card { border-color: #c9d6e6; box-shadow: 0 10px 0 rgba(120,144,170,.15); }
+/* 3 — Rainy: darker blue-gray, glassy */
+body[data-theme="rainy"] {
+  --ink: #2e4a63; --muted: #6d8aa5;
+  background:
+    radial-gradient(700px 380px at 50% -10%, #5b7fa3 0%, transparent 65%),
+    linear-gradient(180deg, #3d5a7a 0%, #4a6d8f 55%, #6d93b3 100%);
+}
+body[data-theme="rainy"] .card { background: linear-gradient(180deg, rgba(255,255,255,.94), rgba(230,242,252,.94)); border-color: #a9c8e2; }
+body[data-theme="rainy"] .subtitle, body[data-theme="rainy"] .theme-line { color: #dcebf7; }
+body[data-theme="rainy"] .hero h1 { color: #fff; text-shadow: 2px 2px 0 #3d5a7a; }
+body[data-theme="rainy"] .hello { color: #cfe7f8; }
+body[data-theme="rainy"] .footer { color: #cfe0ef; }
+/* 4 — Storm: dark & dramatic */
+body[data-theme="storm"] {
+  --ink: #e8e4fb; --muted: #a99fd0;
+  background:
+    radial-gradient(700px 380px at 50% -10%, #5b4b8a 0%, transparent 65%),
+    linear-gradient(180deg, #191430 0%, #2b2350 55%, #453a7a 100%);
+}
+body[data-theme="storm"] .card { background: linear-gradient(180deg, rgba(38,32,68,.96), rgba(52,44,92,.96)); border-color: #6f5fc0; color: #e8e4fb; }
+body[data-theme="storm"] .card .muted, body[data-theme="storm"] .subtitle, body[data-theme="storm"] .theme-line { color: #b6abe0; }
+body[data-theme="storm"] .hero h1 { color: #fff; text-shadow: 0 0 22px #a78bfa, 2px 2px 0 #2b2350; }
+body[data-theme="storm"] .hello { color: #d3bfff; }
+body[data-theme="storm"] .current-top h2, body[data-theme="storm"] .metric strong, body[data-theme="storm"] .json-card h3 { color: #fff; }
+body[data-theme="storm"] .metric { background: rgba(255,255,255,.08); border-color: #6f5fc0; }
+body[data-theme="storm"] .thresholds { background: rgba(255,255,255,.07); border-color: #6f5fc0; }
+body[data-theme="storm"] .theme-pill { background: #2b2350; color: #e8e4fb; border-color: #a78bfa; }
+body[data-theme="storm"] .footer { color: #b6abe0; }
+/* 5 — Snowy: frosty white-blue, glass */
+body[data-theme="snowy"] {
+  --ink: #3c5a7a; --muted: #7d9dbd;
+  background:
+    radial-gradient(700px 380px at 50% -10%, #ffffff 0%, transparent 60%),
+    linear-gradient(180deg, #f4faff 0%, #dceefb 50%, #bcd9f2 100%);
+}
+body[data-theme="snowy"] .card { background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(230,244,255,.92)); border-color: #bfe0f5; backdrop-filter: blur(6px); }
+
+/* ---------- full-screen weather FX layer (pure CSS, no assets) ---------- */
+.fx { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; opacity: 0; transition: opacity .7s ease; }
+body[data-theme="rainy"] .fx, body[data-theme="storm"] .fx, body[data-theme="snowy"] .fx,
+body[data-theme="sunny"] .fx, body[data-theme="cloudy"] .fx { opacity: 1; }
+/* sunny: rotating sun glow */
+body[data-theme="sunny"] .fx::before {
+  content: "☀️"; position: absolute; top: 4%; right: 6%; font-size: 110px;
+  filter: drop-shadow(0 0 34px #ffd94d); animation: sunsweep 14s linear infinite;
+}
+@keyframes sunsweep { to { transform: rotate(360deg); } }
+/* cloudy: drifting cloud blobs */
+body[data-theme="cloudy"] .fx::before, body[data-theme="cloudy"] .fx::after {
+  content: "☁️"; position: absolute; font-size: 84px; opacity: .85; animation: drift 26s linear infinite;
+}
+body[data-theme="cloudy"] .fx::before { top: 8%; left: -12%; }
+body[data-theme="cloudy"] .fx::after { top: 32%; left: -20%; font-size: 110px; animation-duration: 38s; animation-delay: -12s; }
+@keyframes drift { to { transform: translateX(130vw); } }
+/* rainy: falling streaks */
+body[data-theme="rainy"] .fx::before {
+  content: ""; position: absolute; inset: -60% 0 0 0;
+  background: repeating-linear-gradient(105deg, transparent 0 14px, rgba(220,240,255,.55) 14px 16px);
+  animation: rainfall .7s linear infinite;
+}
+@keyframes rainfall { to { transform: translateY(48px); } }
+/* storm: rain + lightning flash */
+body[data-theme="storm"] .fx::before {
+  content: ""; position: absolute; inset: -60% 0 0 0;
+  background: repeating-linear-gradient(100deg, transparent 0 12px, rgba(200,215,255,.5) 12px 14px);
+  animation: rainfall .45s linear infinite;
+}
+body[data-theme="storm"] .fx::after {
+  content: ""; position: absolute; inset: 0; background: #e9e4ff; opacity: 0; animation: lightning 7s linear infinite;
+}
+@keyframes lightning { 0%,93%,96%,100% { opacity: 0; } 94%,95% { opacity: .55; } }
+/* snowy: falling snow dots */
+body[data-theme="snowy"] .fx::before {
+  content: ""; position: absolute; inset: -40px 0 0 0;
+  background-image: radial-gradient(#fff 2.4px, transparent 2.6px), radial-gradient(rgba(255,255,255,.8) 1.6px, transparent 1.8px);
+  background-size: 90px 90px, 55px 55px; background-position: 0 0, 30px 10px;
+  animation: snowfall 9s linear infinite;
+}
+@keyframes snowfall { to { transform: translateY(120px); } }
+@media (max-width: 600px) {
+  body[data-theme="sunny"] .fx::before { font-size: 72px; }
+  body[data-theme="cloudy"] .fx::before { font-size: 56px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bg-decor span, .fx::before, .fx::after { animation: none !important; }
+}

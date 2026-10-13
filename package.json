@@ -1,0 +1,12 @@
+{
+  "name": "weathernow-static",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Responsive weather web application (frontend only) powered by WeatherAPI.com",
+  "scripts": {
+    "build:config": "node scripts/inject-config.js",
+    "vercel-build": "node scripts/inject-config.js",
+    "preview": "npx serve ."
+  }
+}
